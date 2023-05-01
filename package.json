@@ -1,0 +1,10 @@
+{
+  "name": "wordwolf",
+  "private": true,
+  "workspaces": ["wordwolf-frontend", "wordwolf-backend"],
+  "scripts": {
+    "frontend": "yarn workspace wordwolf-frontend",
+    "backend": "yarn workspace wordwolf-backend"
+  }
+}
+

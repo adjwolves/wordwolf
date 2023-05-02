@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "format": "prettier --write --ignore-path .gitignore \"./**/*.{js,jsx,ts,tsx,json}\"",
     "start": "next start",
     "start:dev": "next dev",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@types/node": "18.16.3",

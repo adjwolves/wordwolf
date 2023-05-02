@@ -1,10 +1,19 @@
 {
   "name": "wordwolf",
   "private": true,
-  "workspaces": ["wordwolf-frontend", "wordwolf-backend"],
+  "workspaces": [
+    "wordwolf-frontend",
+    "wordwolf-backend"
+  ],
   "scripts": {
     "frontend": "yarn workspace wordwolf-frontend",
     "backend": "yarn workspace wordwolf-backend"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "eslint": "^8.39.0",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.8",
+    "ts-jest": "^29.1.0"
   }
 }
-

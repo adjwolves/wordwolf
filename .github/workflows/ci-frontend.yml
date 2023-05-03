@@ -2,11 +2,18 @@ name: CI for frontend
 on:
   push:
     branches:
+      - main
+    paths:
+      - "woldwolf-frontend/**"
+      - ".github/workflows/ci-frontend.yml"
+      - "!**.md"
+  pull_request:
+    branches:
       - "*"
     paths:
       - "woldwolf-frontend/**"
+      - ".github/workflows/ci-frontend.yml"
       - "!**.md"
-  pull_request:
 
 jobs:
   ci:

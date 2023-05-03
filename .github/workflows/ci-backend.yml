@@ -5,12 +5,14 @@ on:
       - main
     paths:
       - "woldwolf-backend/**"
+      - ".github/workflows/ci-backend.yml"
       - "!**.md"
   pull_request:
     branches:
       - "*"
     paths:
       - "woldwolf-backend/**"
+      - ".github/workflows/ci-backend.yml"
       - "!**.md"
 
 jobs:
@@ -19,3 +21,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+          cache: "yarn"
+
+      - name: Install packages
+        run: yarn backend install --frozen-lockfile
+
+      - name: Formatter
+        run: yarn backend format 
+
+      - name: Linter
+        run: yarn backend lint
+
+      - name: Unit test
+        run: yarn backend test

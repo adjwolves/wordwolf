@@ -2,7 +2,7 @@ name: CI for frontend
 on:
   push:
     branches:
-      - main
+      - "*"
     paths:
       - "woldwolf-frontend/**"
       - "!**.md"

@@ -2,7 +2,7 @@ name: CI for frontend
 on:
   push:
     branches:
-      - "*"
+      - main
     paths:
       - "woldwolf-frontend/**"
       - "!**.md"
@@ -37,4 +37,3 @@ jobs:
 
       - name: Unit test
         run: yarn frontend test
-

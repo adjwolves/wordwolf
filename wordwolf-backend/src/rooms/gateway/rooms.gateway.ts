@@ -19,18 +19,15 @@ export class EventsGateway {
     const roomId = body.roomId;
     const userName = body.userName;
 
-    const usersInRoom = await this.io.in(roomId).fetchSockets();
-    const isOwner = Boolean(usersInRoom.length);
+    const toBeOwner = (await this.io.in(roomId).fetchSockets()).length !== 0;
 
-    let sessionId = "";
     let connectionId = "";
-
-    this.io.on("connection", async (socket) => {
-      await socket.join(roomId);
+    this.io.on("connection", (socket) => {
+      socket.join(roomId);
       connectionId = socket.id;
     });
 
-    sessionId = this.roomService.joinRoom(userName, connectionId, isOwner, roomId);
+    const sessionId = this.roomService.joinRoom(userName, connectionId, toBeOwner, roomId);
     return sessionId;
   }
 }

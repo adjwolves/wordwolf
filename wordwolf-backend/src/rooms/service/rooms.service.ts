@@ -19,7 +19,7 @@ export class RoomService {
   joinRoom(userName: string, connectionId: string, isOwner: boolean, roomId: string): string {
     const room = this.roomRepository.findBy(roomId);
     if (room === undefined) {
-      throw new Error(`room dose not exist: ${roomId}`);
+      throw new Error(`room does not exist: ${roomId}`);
     }
     const sessionId = randomUUID();
     const user = new User(sessionId, connectionId, userName, isOwner, roomId);

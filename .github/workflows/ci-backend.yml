@@ -4,13 +4,15 @@ on:
     branches:
       - main
     paths:
-      - "woldwolf-backend/**"
+      - "wordwolf-backend/**"
+      - ".github/workflows/ci-backend.yml"
       - "!**.md"
   pull_request:
     branches:
       - "*"
     paths:
-      - "woldwolf-backend/**"
+      - "wordwolf-backend/**"
+      - ".github/workflows/ci-backend.yml"
       - "!**.md"
 
 jobs:

@@ -6,7 +6,9 @@ export class User {
     this.isOwner = isOwner;
     this.roomId = roomId;
   }
+  // userのSessionのID
   sessionId: string;
+  // Socket.IOのコネクションのID
   connectionId: string;
   userName: string;
   isOwner: boolean;

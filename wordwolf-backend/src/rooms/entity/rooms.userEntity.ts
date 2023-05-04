@@ -12,6 +12,7 @@ export class User {
   connectionId: string;
   userName: string;
   isOwner: boolean;
+  // TODO: roomIdからのUser参照が多すぎる場合、変更
   roomId: string;
   role?: string;
 }

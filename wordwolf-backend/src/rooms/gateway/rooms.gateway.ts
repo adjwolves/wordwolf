@@ -1,6 +1,6 @@
 import { SubscribeMessage, WebSocketGateway, MessageBody, WebSocketServer } from "@nestjs/websockets";
 import { Server } from "socket.io";
-import { RoomService } from "../service/rooms.service";
+import { RoomsService } from "../service/rooms.service";
 import { JoinRoomDto } from "../dto/rooms.gateway";
 
 @WebSocketGateway({
@@ -8,8 +8,8 @@ import { JoinRoomDto } from "../dto/rooms.gateway";
     origin: "http://localhost:3000",
   },
 })
-export class EventsGateway {
-  constructor(private readonly roomService: RoomService) {}
+export class RoomsGateway {
+  constructor(private readonly roomsService: RoomsService) {}
 
   @WebSocketServer()
   io!: Server;
@@ -27,7 +27,7 @@ export class EventsGateway {
       connectionId = socket.id;
     });
 
-    const sessionId = this.roomService.joinRoom(userName, connectionId, toBeOwner, roomId);
+    const sessionId = this.roomsService.joinRoom(userName, connectionId, toBeOwner, roomId);
     return sessionId;
   }
 }

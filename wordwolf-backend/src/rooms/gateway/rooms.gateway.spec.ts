@@ -1,18 +1,18 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { EventsGateway } from "./rooms.gateway";
-import { RoomService } from "../service/rooms.service";
-import { RoomRepository } from "../repository/rooms.roomRepository";
-import { UserRepository } from "../repository/rooms.userRepository";
+import { RoomsGateway } from "./rooms.gateway";
+import { RoomsService } from "../service/rooms.service";
+import { RoomsRepository } from "../repository/rooms";
+import { UsersRepository } from "../repository/users";
 
-describe("EventsGateway", () => {
-  let gateway: EventsGateway;
+describe("RoomsGateway", () => {
+  let gateway: RoomsGateway;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [RoomService, EventsGateway, RoomRepository, UserRepository],
+      providers: [RoomsService, RoomsGateway, RoomsRepository, UsersRepository],
     }).compile();
 
-    gateway = module.get<EventsGateway>(EventsGateway);
+    gateway = module.get<RoomsGateway>(RoomsGateway);
   });
 
   it("should be defined", () => {

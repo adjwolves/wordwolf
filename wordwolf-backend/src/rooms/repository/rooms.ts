@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { Room } from "../entity/rooms.roomEntitty";
+import { Room } from "../entity/room";
 
 @Injectable()
-export class RoomRepository {
+export class RoomsRepository {
   private rooms: Room[] = [];
   store(room: Room) {
     this.rooms.push(room);

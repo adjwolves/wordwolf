@@ -1,14 +1,14 @@
 import { Controller, Post, Body } from "@nestjs/common";
-import { RoomService } from "../service/rooms.service";
+import { RoomsService } from "../service/rooms.service";
 import { CreateRoomDto } from "../dto/rooms.controller";
 
 @Controller("room")
-export class RoomController {
-  constructor(private readonly roomService: RoomService) {}
+export class RoomsController {
+  constructor(private readonly roomsService: RoomsService) {}
 
   @Post()
   createRoom(@Body() createRoomDto: CreateRoomDto) {
-    const roomId = this.roomService.createRoom(createRoomDto.category, createRoomDto.timeLimit);
+    const roomId = this.roomsService.createRoom(createRoomDto.category, createRoomDto.timeLimit);
     return roomId;
   }
 }

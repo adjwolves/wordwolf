@@ -1,13 +1,13 @@
 export class EventsModule {}
 import { Module } from "@nestjs/common";
-import { RoomController } from "./controller/rooms.controller";
-import { RoomService } from "./service/rooms.service";
-import { EventsGateway } from "./gateway/rooms.gateway";
-import { RoomRepository } from "./repository/rooms.roomRepository";
-import { UserRepository } from "./repository/rooms.userRepository";
+import { RoomsController } from "./controller/rooms.controller";
+import { RoomsService } from "./service/rooms.service";
+import { RoomsGateway } from "./gateway/rooms.gateway";
+import { RoomsRepository } from "./repository/rooms";
+import { UsersRepository } from "./repository/users";
 
 @Module({
-  controllers: [RoomController],
-  providers: [RoomService, EventsGateway, RoomRepository, UserRepository],
+  controllers: [RoomsController],
+  providers: [RoomsService, RoomsGateway, RoomsRepository, UsersRepository],
 })
-export class RoomModule {}
+export class RoomsModule {}

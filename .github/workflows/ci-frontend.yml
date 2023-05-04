@@ -1,0 +1,41 @@
+name: CI for frontend
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "wordwolf-frontend/**"
+      - ".github/workflows/ci-frontend.yml"
+      - "!**.md"
+  pull_request:
+    branches:
+      - "*"
+    paths:
+      - "wordwolf-frontend/**"
+      - ".github/workflows/ci-frontend.yml"
+      - "!**.md"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+          cache: "yarn"
+
+      - name: Install packages
+        run: yarn frontend install --frozen-lockfile
+
+      - name: Formatter
+        run: yarn frontend format 
+
+      - name: Linter
+        run: yarn frontend lint
+
+      - name: Unit test
+        run: yarn frontend test

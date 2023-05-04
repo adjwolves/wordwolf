@@ -1,5 +1,5 @@
-import { SubscribeMessage, WebSocketGateway, MessageBody, WebSocketServer } from "@nestjs/websockets";
-import { Server } from "socket.io";
+import { SubscribeMessage, WebSocketGateway, MessageBody, WebSocketServer, ConnectedSocket } from "@nestjs/websockets";
+import { Server, Socket } from "socket.io";
 import { RoomsService } from "../service/rooms.service";
 import { JoinRoomDto } from "../dto/rooms.gateway";
 
@@ -15,19 +15,12 @@ export class RoomsGateway {
   io!: Server;
 
   @SubscribeMessage("join-room")
-  async joinRoom(@MessageBody() body: JoinRoomDto): Promise<string> {
+  async joinRoom(@ConnectedSocket() socket: Socket, @MessageBody() body: JoinRoomDto): Promise<string> {
     const roomId = body.roomId;
     const userName = body.userName;
-
-    const toBeOwner = (await this.io.in(roomId).fetchSockets()).length !== 0;
-
-    let connectionId = "";
-    this.io.on("connection", (socket) => {
-      socket.join(roomId);
-      connectionId = socket.id;
-    });
-
-    const sessionId = this.roomsService.joinRoom(userName, connectionId, toBeOwner, roomId);
+    const toBeOwner = (await this.io.in(roomId).fetchSockets()).length === 0;
+    const sessionId = this.roomsService.joinRoom(userName, socket.id, toBeOwner, roomId);
+    socket.join(roomId);
     return sessionId;
   }
 }

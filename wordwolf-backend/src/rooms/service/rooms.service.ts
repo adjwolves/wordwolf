@@ -25,6 +25,10 @@ export class RoomService {
     isOwner: boolean,
     roomId: string,
   ): string {
+    const room = this.roomRepository.findBy(roomId);
+    if (room === undefined) {
+      throw new Error(`room dose not exist: ${roomId}`);
+    }
     const sessionId = randomUUID();
     const user = new User(sessionId, connectionId, userName, isOwner, roomId);
     this.userRepository.store(user);

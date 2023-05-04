@@ -6,7 +6,7 @@ import {
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 import { RoomService } from '../service/rooms.service';
-import { joinRoomDto } from '../dto/rooms.gateway';
+import { JoinRoomDto } from '../dto/rooms.gateway';
 
 @WebSocketGateway({
   cors: {
@@ -20,24 +20,27 @@ export class EventsGateway {
   io: Server;
 
   @SubscribeMessage('join-room')
-  async joinRoom(@MessageBody() body: joinRoomDto): Promise<string> {
+  async joinRoom(@MessageBody() body: JoinRoomDto): Promise<string> {
     const roomId = body.roomId;
     const userName = body.userName;
 
     const usersInRoom = await this.io.in(roomId).fetchSockets();
     const isOwner = Boolean(usersInRoom.length);
+
     let sessionId = '';
+    let connectionId = '';
 
-    this.io.on('connection', (socket) => {
-      socket.join(roomId);
-
-      sessionId = this.roomService.joinRoom(
-        userName,
-        socket.id,
-        isOwner,
-        roomId,
-      );
+    this.io.on('connection', async (socket) => {
+      await socket.join(roomId);
+      connectionId = socket.id;
     });
+
+    sessionId = this.roomService.joinRoom(
+      userName,
+      connectionId,
+      isOwner,
+      roomId,
+    );
     return sessionId;
   }
 }

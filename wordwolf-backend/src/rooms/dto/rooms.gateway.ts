@@ -1,9 +1,9 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty } from "class-validator";
 
 export class JoinRoomDto {
   @IsNotEmpty()
-  roomId: string;
+  roomId!: string;
 
   @IsNotEmpty()
-  userName: string;
+  userName!: string;
 }

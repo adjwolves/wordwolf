@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { Room } from '../entity/rooms.roomEntitty';
+import { Injectable } from "@nestjs/common";
+import { Room } from "../entity/rooms.roomEntitty";
 
 @Injectable()
 export class RoomRepository {
@@ -7,7 +7,7 @@ export class RoomRepository {
   store(room: Room) {
     this.rooms.push(room);
   }
-  findBy(roomId: string): Room {
+  findBy(roomId: string): Room | undefined {
     return this.rooms.find((element) => element.roomId === roomId);
   }
 }

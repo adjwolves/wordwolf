@@ -1,10 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventsGateway } from './rooms.gateway';
-import { RoomService } from '../service/rooms.service';
-import { RoomRepository } from '../repository/rooms.roomRepository';
-import { UserRepository } from '../repository/rooms.userRepository';
+import { Test, TestingModule } from "@nestjs/testing";
+import { EventsGateway } from "./rooms.gateway";
+import { RoomService } from "../service/rooms.service";
+import { RoomRepository } from "../repository/rooms.roomRepository";
+import { UserRepository } from "../repository/rooms.userRepository";
 
-describe('EventsGateway', () => {
+describe("EventsGateway", () => {
   let gateway: EventsGateway;
 
   beforeEach(async () => {
@@ -15,7 +15,7 @@ describe('EventsGateway', () => {
     gateway = module.get<EventsGateway>(EventsGateway);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(gateway).toBeDefined();
   });
 });

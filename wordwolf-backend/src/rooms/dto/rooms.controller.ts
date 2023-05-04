@@ -1,8 +1,8 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty } from "class-validator";
 
 export class CreateRoomDto {
   @IsNotEmpty()
-  category: string;
+  category!: string;
 
-  timeLimit = '300';
+  timeLimit = "300";
 }

@@ -1,11 +1,11 @@
-import { Test } from '@nestjs/testing';
-import { RoomController } from './rooms.controller';
-import { RoomService } from '../service/rooms.service';
-import { CreateRoomDto } from '../dto/rooms.controller';
-import { RoomRepository } from '../repository/rooms.roomRepository';
-import { UserRepository } from '../repository/rooms.userRepository';
+import { Test } from "@nestjs/testing";
+import { RoomController } from "./rooms.controller";
+import { RoomService } from "../service/rooms.service";
+import { CreateRoomDto } from "../dto/rooms.controller";
+import { RoomRepository } from "../repository/rooms.roomRepository";
+import { UserRepository } from "../repository/rooms.userRepository";
 
-describe('RoomController', () => {
+describe("RoomController", () => {
   let roomController: RoomController;
   let roomService: RoomService;
 
@@ -18,12 +18,12 @@ describe('RoomController', () => {
     roomService = moduleRef.get(RoomService);
   });
 
-  describe('createRoom()', () => {
-    it('should return roomId', () => {
+  describe("createRoom()", () => {
+    it("should return roomId", () => {
       const createRoomDto = new CreateRoomDto();
-      createRoomDto.category = 'fruit';
-      jest.spyOn(roomService, 'createRoom').mockImplementation(() => 'roomId');
-      expect(roomController.createRoom(createRoomDto)).toBe('roomId');
+      createRoomDto.category = "fruit";
+      jest.spyOn(roomService, "createRoom").mockImplementation(() => "roomId");
+      expect(roomController.createRoom(createRoomDto)).toBe("roomId");
     });
   });
 });

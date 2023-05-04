@@ -1,25 +1,20 @@
-import {
-  SubscribeMessage,
-  WebSocketGateway,
-  MessageBody,
-  WebSocketServer,
-} from '@nestjs/websockets';
-import { Server } from 'socket.io';
-import { RoomService } from '../service/rooms.service';
-import { JoinRoomDto } from '../dto/rooms.gateway';
+import { SubscribeMessage, WebSocketGateway, MessageBody, WebSocketServer } from "@nestjs/websockets";
+import { Server } from "socket.io";
+import { RoomService } from "../service/rooms.service";
+import { JoinRoomDto } from "../dto/rooms.gateway";
 
 @WebSocketGateway({
   cors: {
-    origin: 'http://localhost:3000',
+    origin: "http://localhost:3000",
   },
 })
 export class EventsGateway {
   constructor(private readonly roomService: RoomService) {}
 
   @WebSocketServer()
-  io: Server;
+  io!: Server;
 
-  @SubscribeMessage('join-room')
+  @SubscribeMessage("join-room")
   async joinRoom(@MessageBody() body: JoinRoomDto): Promise<string> {
     const roomId = body.roomId;
     const userName = body.userName;
@@ -27,20 +22,15 @@ export class EventsGateway {
     const usersInRoom = await this.io.in(roomId).fetchSockets();
     const isOwner = Boolean(usersInRoom.length);
 
-    let sessionId = '';
-    let connectionId = '';
+    let sessionId = "";
+    let connectionId = "";
 
-    this.io.on('connection', async (socket) => {
+    this.io.on("connection", async (socket) => {
       await socket.join(roomId);
       connectionId = socket.id;
     });
 
-    sessionId = this.roomService.joinRoom(
-      userName,
-      connectionId,
-      isOwner,
-      roomId,
-    );
+    sessionId = this.roomService.joinRoom(userName, connectionId, isOwner, roomId);
     return sessionId;
   }
 }

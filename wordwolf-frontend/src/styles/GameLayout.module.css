@@ -1,0 +1,16 @@
+.main {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.gameArea {
+  width: 80vw;
+  aspect-ratio: 16/9;
+  border: solid 2px #727272;
+  border-radius: 10px;
+  position: relative;
+}
+

@@ -1,12 +1,78 @@
 .gameTitleBox {
   position: absolute;
   width: 50%;
+  height: auto;
   left: 25%;
   top: 5%;
-  height: auto;
 }
 
 .gameTitle {
   display: flex;
   justify-content: center
+}
+
+.gameMenuBox {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  height: auto;
+  bottom: 12%;
+  padding: 0 10%;
+}
+
+.gameMenu {
+  width: 35%;
+} 
+
+.modalPanel {
+  background-color: rgb(var(--background-rgb));
+  position: absolute;
+  width: 40%;
+  border-radius: 40px;
+}
+
+.makingPanel {
+  height: 82%;
+  top: 9%;
+}
+
+.panelHeader {
+  margin: 25px auto 30px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.panelForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 8%;
+}
+
+.panelForm .formItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.panelForm .formInput {
+  width: 95%;
+  margin-left: 4%;
+  margin-top: 2%;
+}
+
+.makingPanel .formLimitTime {
+  width: 15%;
+  margin-right: 3%;
+  text-align: right;
+}
+
+.panelSubmit {
+  position: absolute;
+  width: 50%;
+  bottom: 7%;
+  left: 25%;
 }

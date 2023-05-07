@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "modern-css-reset/dist/reset.min.css";
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";

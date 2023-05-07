@@ -6,9 +6,9 @@ jest.mock("next/router", () => ({
   useRouter() {
     return {
       asPath: "/",
-      push: jest.fn()
-    }
-  }
+      push: jest.fn(),
+    };
+  },
 }));
 
 describe("Home", () => {

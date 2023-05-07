@@ -25,4 +25,3 @@ export default function Room() {
 Room.getLayout = function getLayout(page: ReactElement) {
   return <GameLayout>{page}</GameLayout>;
 };
-

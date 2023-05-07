@@ -62,7 +62,7 @@ function MakingModal({ open, onClose, categories }: MakingModalProps) {
   const router = useRouter();
 
   // 「部屋をつくる」が押されたときに発火
-  const handleSubmit = async (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 
     const target = e.target as typeof e.target & {
@@ -75,6 +75,11 @@ function MakingModal({ open, onClose, categories }: MakingModalProps) {
       timeLimit: target["time-limit"]?.value,
       userName: target["user-name"]?.value,
     };
+
+    // TODO ちゃんと全体のバリデーションをする
+    if (dataRaw.timeLimit === undefined) {
+      return;
+    }
 
     const timeLimit = parseInt(dataRaw.timeLimit);
 

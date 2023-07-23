@@ -17,10 +17,9 @@ export class RoomsGateway {
   @SubscribeMessage("join-room")
   async joinRoom(@ConnectedSocket() socket: Socket, @MessageBody() body: JoinRoomDto): Promise<string> {
     const roomId = body.roomId;
-    const userName = body.userName;
-    const toBeOwner = (await this.io.in(roomId).fetchSockets()).length === 0;
-    const sessionId = this.roomsService.joinRoom(userName, socket.id, toBeOwner, roomId);
+    const userId = body.userId;
+    this.roomsService.joinRoom(userId, roomId);
     socket.join(roomId);
-    return sessionId;
+    return userId;
   }
 }

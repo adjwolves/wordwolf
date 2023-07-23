@@ -1,0 +1,35 @@
+.primaryColor {
+  color: #FFA6A5;
+  background-color: #DA0063;
+}
+
+.primaryColor:hover {
+  background-color: #BA004A;
+}
+
+.secondaryColor {
+  color: #8FD14F;
+  background-color: #2E7164;
+}
+
+.secondaryColor:hover {
+  background-color: #226154;
+}
+
+.button {
+  border: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.largeSize {
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 24px;
+}
+
+.mediumSize {
+  border-radius: 10px;
+  padding: 8px 0;
+  font-size: 18px;
+}

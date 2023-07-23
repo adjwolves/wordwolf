@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from "@nestjs/common";
 import { RoomsService } from "../service/rooms.service";
-import { CreateRoomDto } from "../dto/rooms.controller";
+import { CreateRoomDto, CreateUserDto } from "../dto/rooms.controller";
 import { RoomsRepository } from "../repository/rooms";
 import { UsersRepository } from "../repository/users";
 
@@ -16,6 +16,12 @@ export class RoomsController {
   createRoom(@Body() createRoomDto: CreateRoomDto) {
     const roomId = this.roomsService.createRoom(createRoomDto.category, createRoomDto.timeLimit);
     return roomId;
+  }
+
+  @Post(":roomId/user")
+  createUserInRoom(@Param("roomId") roomId: string, @Body() createUserDto: CreateUserDto) {
+    const userId = this.roomsService.createUserInRoom(createUserDto.userName, roomId)
+    return userId;
   }
 
   @Get(":roomId")

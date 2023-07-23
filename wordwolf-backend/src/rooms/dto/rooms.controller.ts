@@ -6,3 +6,8 @@ export class CreateRoomDto {
 
   timeLimit = "300";
 }
+
+export class CreateUserDto {
+  @IsNotEmpty()
+  userName!: string;
+}

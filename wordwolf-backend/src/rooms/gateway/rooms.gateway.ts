@@ -20,6 +20,7 @@ export class RoomsGateway {
     const userId = body.userId;
     this.roomsService.joinRoom(userId, roomId);
     socket.join(roomId);
+    socket.to(roomId).emit("refresh");
     return userId;
   }
 }

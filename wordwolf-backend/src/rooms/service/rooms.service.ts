@@ -30,7 +30,7 @@ export class RoomsService {
    * @return ユーザID
    * @throws 部屋が存在しない場合はエラーとする
    */
-  makeUserInRoom(userName: string, roomId: string): string {
+  createUserInRoom(userName: string, roomId: string): string {
     const room = this.roomsRepository.findBy(roomId);
     if (room === undefined) {
       throw new Error(`room does not exist: ${roomId}`);

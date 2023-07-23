@@ -30,9 +30,13 @@ export default function Room() {
   };
 
   useEffect(() => {
-    if (roomId === undefined) { return; }
+    if (roomId === undefined) {
+      return;
+    }
     const userId = localStorage.getItem(`adjwolves:${roomId}`);
-    if (userId === undefined) { return; }
+    if (userId === undefined) {
+      return;
+    }
 
     const socket = io("http://localhost:3010");
     socket.on("connect", () => {
@@ -52,7 +56,9 @@ export default function Room() {
       <p>部屋ID：{roomId}</p>
       <p>ユーザ</p>
       <ul>
-        {names.map((name) => <li key={name}>{name}</li>)}
+        {names.map((name) => (
+          <li key={name}>{name}</li>
+        ))}
       </ul>
       <Link href="/">トップに戻る</Link>
     </>

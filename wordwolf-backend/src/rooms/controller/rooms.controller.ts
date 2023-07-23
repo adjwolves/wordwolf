@@ -20,7 +20,7 @@ export class RoomsController {
 
   @Post(":roomId/user")
   createUserInRoom(@Param("roomId") roomId: string, @Body() createUserDto: CreateUserDto) {
-    const userId = this.roomsService.createUserInRoom(createUserDto.userName, roomId)
+    const userId = this.roomsService.createUserInRoom(createUserDto.userName, roomId);
     return userId;
   }
 

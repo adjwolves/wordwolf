@@ -86,7 +86,7 @@ function MakingModal({ open, onClose, categories }: MakingModalProps) {
 
     localStorage.setItem(`adjwolves:${roomId}`, userId);
 
-    router.push({ pathname: "room", query: { roomId }});
+    router.push({ pathname: "room", query: { roomId } });
   };
 
   return (
@@ -132,25 +132,25 @@ function MakingModal({ open, onClose, categories }: MakingModalProps) {
  * @returns 部屋ID
  */
 async function createRoom(category: string, timeLimit: number): Promise<string> {
-    const postData = {
-      category,
-      timeLimit,
-    };
+  const postData = {
+    category,
+    timeLimit,
+  };
 
-    const endpoint = "http://localhost:3010/room";
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    };
+  const endpoint = "http://localhost:3010/room";
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
 
-    // TODO レスポンスが正しいかどうか検証する
-    const response = await fetch(endpoint, options);
-    const roomId = await response.text();
+  // TODO レスポンスが正しいかどうか検証する
+  const response = await fetch(endpoint, options);
+  const roomId = await response.text();
 
-    return roomId;
+  return roomId;
 }
 
 /**
@@ -158,21 +158,21 @@ async function createRoom(category: string, timeLimit: number): Promise<string> 
  * @returns ユーザID
  */
 async function createUserInRoom(userName: string, roomId: string): Promise<string> {
-    const postData = {
-      userName,
-    };
+  const postData = {
+    userName,
+  };
 
-    const endpoint = `http://localhost:3010/room/${roomId}/user`;
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    };
+  const endpoint = `http://localhost:3010/room/${roomId}/user`;
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
 
-    const response = await fetch(endpoint, options);
-    const userId = await response.text();
+  const response = await fetch(endpoint, options);
+  const userId = await response.text();
 
-    return userId;
+  return userId;
 }

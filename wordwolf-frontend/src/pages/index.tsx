@@ -77,30 +77,16 @@ function MakingModal({ open, onClose, categories }: MakingModalProps) {
     };
 
     // TODO ちゃんと全体のバリデーションをする
-    if (dataRaw.timeLimit === undefined) {
+    if (dataRaw.timeLimit === undefined || dataRaw.category === undefined || dataRaw.userName === undefined) {
       return;
     }
 
-    const timeLimit = parseInt(dataRaw.timeLimit);
+    const roomId = await createRoom(dataRaw.category, parseInt(dataRaw.timeLimit));
+    const userId = await createUserInRoom(dataRaw.userName, roomId);
 
-    const postData = {
-      category: dataRaw.category,
-      timeLimit,
-    };
+    localStorage.setItem(`adjwolves:${roomId}`, userId);
 
-    const endpoint = "http://localhost:3010/room";
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    };
-
-    const response = await fetch(endpoint, options);
-    const roomId = await response.text();
-
-    router.push({ pathname: "room", query: { roomId, userName: dataRaw.userName } }, "room");
+    router.push({ pathname: "room", query: { roomId } });
   };
 
   return (
@@ -139,4 +125,54 @@ function MakingModal({ open, onClose, categories }: MakingModalProps) {
       </section>
     </Modal>
   );
+}
+
+/**
+ * バックエンドAPIを叩いて部屋を作る
+ * @returns 部屋ID
+ */
+async function createRoom(category: string, timeLimit: number): Promise<string> {
+  const postData = {
+    category,
+    timeLimit,
+  };
+
+  const endpoint = "http://localhost:3010/room";
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
+
+  // TODO レスポンスが正しいかどうか検証する
+  const response = await fetch(endpoint, options);
+  const roomId = await response.text();
+
+  return roomId;
+}
+
+/**
+ * バックエンドAPIを叩いてユーザを部屋内に作る
+ * @returns ユーザID
+ */
+async function createUserInRoom(userName: string, roomId: string): Promise<string> {
+  const postData = {
+    userName,
+  };
+
+  const endpoint = `http://localhost:3010/room/${roomId}/user`;
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  };
+
+  const response = await fetch(endpoint, options);
+  const userId = await response.text();
+
+  return userId;
 }

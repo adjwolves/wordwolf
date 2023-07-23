@@ -5,5 +5,5 @@ export class JoinRoomDto {
   roomId!: string;
 
   @IsNotEmpty()
-  userName!: string;
+  userId!: string;
 }

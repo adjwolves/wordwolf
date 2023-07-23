@@ -1,18 +1,38 @@
 export class User {
-  constructor(sessionId: string, connectionId: string, userName: string, isOwner: boolean, roomId: string) {
-    this.sessionId = sessionId;
-    this.connectionId = connectionId;
-    this.userName = userName;
-    this.isOwner = isOwner;
-    this.roomId = roomId;
-  }
-  // userのSessionのID
-  sessionId: string;
-  // Socket.IOのコネクションのID
-  connectionId: string;
+  // userのID
+  userId: string;
   userName: string;
-  isOwner: boolean;
+  // isOwnerは有効化するまではundefined
+  isOwner?: boolean;
   // TODO: roomIdからのUser参照が多すぎる場合、変更
   roomId: string;
   role?: string;
+
+  // 入室した状態かどうか
+  joined: boolean;
+
+  constructor(userId: string, userName: string, roomId: string) {
+    this.userId = userId;
+    this.userName = userName;
+    this.roomId = roomId;
+    this.joined = false;
+  }
+
+  get hasJoined(): boolean {
+    return this.joined;
+  }
+
+  /**
+   * 部屋に入室させる
+   */
+  joinRoom(): void {
+    this.joined = true;
+  }
+
+  /**
+   * 部屋のオーナーに設定する
+   */
+  setToBeOwner(): void {
+    this.isOwner = true;
+  }
 }

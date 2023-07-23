@@ -44,7 +44,6 @@ export class RoomsController {
       category: room.category,
       timeLimit: room.timeLimit,
       users: joinedUsers.map((u) => ({
-        userId: u.userId,
         userName: u.userName,
         isOwner: u.isOwner,
       })),
